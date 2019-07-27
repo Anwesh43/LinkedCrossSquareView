@@ -198,4 +198,28 @@ class CrossSquareView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : CrossSquareView) {
+
+        private val animator : Animator = Animator(view)
+        private val cs : CrossSquare = CrossSquare(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            cs.draw(canvas, paint)
+            animator.animate {
+                cs.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            cs.startUpdating {
+                animator.start()
+            }
+        }
+
+
+    }
 }
