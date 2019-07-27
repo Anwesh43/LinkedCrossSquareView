@@ -220,7 +220,13 @@ class CrossSquareView(ctx : Context) : View(ctx) {
                 animator.start()
             }
         }
+    }
 
-
+    companion object {
+        fun create(activity : Activity) : CrossSquareView {
+            val view : CrossSquareView = CrossSquareView(activity)
+            activity.setContentView(view)
+            return view 
+        }
     }
 }
